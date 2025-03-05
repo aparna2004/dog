@@ -1,4 +1,12 @@
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { 
+  Table, 
+  TableBody, 
+  TableCaption, 
+  TableCell, 
+  TableHead, 
+  TableHeader, 
+  TableRow 
+} from "@/components/ui/table";
 
 interface GenericTableProps {
   headers: string[]; // Array of table headers
@@ -7,20 +15,26 @@ interface GenericTableProps {
 
 const GenericTable = ({ headers, data }: GenericTableProps) => {
   return (
-    <Table className="w-full">
-      <TableCaption>A list of weather metrics.</TableCaption>
-      <TableHeader>
+    <Table className="w-full border border-pink-500 shadow-lg rounded-s overflow-hidden">
+      <TableCaption className="text-pink-400 font-light italic">
+        list of weather metrics.
+      </TableCaption>
+      <TableHeader className="bg-purple-950">
         <TableRow>
           {headers.map((header, index) => (
-            <TableHead key={index}>{header}</TableHead>
+            <TableHead key={index} className="p-3 text-orange-400 font-bold uppercase">
+              {header}
+            </TableHead>
           ))}
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody className="bg-purple-950">
         {data.map((row, rowIndex) => (
-          <TableRow key={rowIndex}>
+          <TableRow key={rowIndex} className="hover:bg-purple-900 transition duration-200">
             {row.map((cell, cellIndex) => (
-              <TableCell key={cellIndex}>{cell}</TableCell>
+              <TableCell key={cellIndex} className="p-3 text-white border-t border-pink-500">
+                {cell}
+              </TableCell>
             ))}
           </TableRow>
         ))}
