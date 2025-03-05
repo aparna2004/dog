@@ -21,34 +21,34 @@ interface WeatherCardProps {
 
 const WeatherCard: React.FC<WeatherCardProps> = ({ data }) => {
   return (
-    <Card className="max-w-3xl mx-auto">
+    <Card className="max-w-3xl mx-auto bg-purple-950 rounded-xs shadow-2xl border-0 text-white p-6">
       <CardHeader>
-        <div className="flex items-center gap-4">
-          {/* Weather Icon on the Left */}
+        <div className="flex items-center gap-6">
+          {/* Weather Icon */}
           <img
             src={data.current.weather_icons[0]}
             alt={data.current.weather_descriptions[0]}
-            className="w-12 h-12"
+            className="w-16 h-16 rounded-full border-2 border-pink-500 shadow-md"
           />
           <div>
-            <CardTitle className="text-xl font-bold">
+            <CardTitle className="text-2xl font-extrabold text-orange-400">
               {data.location.name}, {data.location.country}
             </CardTitle>
-            <p className="font-bold text-lg">{data.current.temperature}°C</p>
+            <p className="text-lg font-semibold text-pink-400">
+              {data.current.temperature}°C
+            </p>
           </div>
         </div>
       </CardHeader>
-      <CardContent>
-        <p>
-          <span className="font-semibold">Region:</span> {data.location.region}
+      <CardContent className="space-y-2">
+        <p className="text-lg">
+          <span className="font-bold text-orange-400">Region:</span> {data.location.region}
         </p>
-        <p>
-          <span className="font-semibold">Observation Time:</span>{" "}
-          {data.current.observation_time}
+        <p className="text-lg">
+          <span className="font-bold text-orange-400">Observation Time:</span> {data.current.observation_time}
         </p>
-        <p>
-          <span className="font-semibold">Weather:</span>{" "}
-          {data.current.weather_descriptions.join(", ")}
+        <p className="text-lg">
+          <span className="font-bold text-orange-400">Weather:</span> {data.current.weather_descriptions.join(", ")}
         </p>
       </CardContent>
     </Card>
