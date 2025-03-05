@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCurrentWeather } from "@/services/dashboard";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { CloudSunRain } from "lucide-react";
+import { ThermometerSun } from "lucide-react";
 import { InputWithButton } from "@/components/shared/InputWithButton";
 import { Skeleton } from "@/components/ui/skeleton";
 import GenericTable from "@/components/GenericTable";
@@ -19,9 +19,7 @@ const Dashboard = () => {
     enabled: false,
   });
 
-  // Trigger to show error dialog when an error occurs
   if (isError) {
-    // Set error message and show error dialog
     const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
     return (
       <ErrorDialog
@@ -49,40 +47,45 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="mt-4 max-w-6xl w-full bg-white shadow-sm rounded-lg p-6 mx-auto flex flex-row items-center gap-4">
+      {/* Dashboard Container */}
+      <div className="mt-6 max-w-5xl w-full bg-purple-950 border border-purple-800 shadow-lg rounded-s p-6 mx-auto flex items-center gap-6">
         {/* Avatar */}
-        <Avatar>
-          <AvatarFallback className="bg-gray-100 flex items-center justify-center w-10 h-10">
-            <CloudSunRain className="w-6 h-6 text-gray-600" />
+        <Avatar className="w-12 h-12">
+          <AvatarFallback className="bg-purple-800 flex items-center justify-center w-12 h-12">
+            <ThermometerSun className="w-8 h-8 text-orange-300" />
           </AvatarFallback>
         </Avatar>
 
         {/* Input with Button */}
-        <InputWithButton
-          btnText="Fetch"
-          placeholderText="Enter the city"
-          onSubmit={() => refetch()}
-          onChange={setCity}
-        />
+        <div className="flex-1 text-orange-300">
+          <InputWithButton
+            btnText="Fetch Weather"
+            placeholderText="Enter city name..."
+            onSubmit={() => refetch()}
+            onChange={setCity}
+          />
+        </div>
       </div>
 
       {/* Skeleton Loader */}
-      {isLoading && <Skeleton className="h-32 w-full" />}
+      {isLoading && <Skeleton className="h-40 w-full mt-6 bg-purple-800" />}
 
-      {/* Weather Data Display as a Card */}
-      <div className="mt-6">
-        {data && <WeatherCard data={data as WeatherData} />}
-      </div>
+      {/* Weather Card */}
+      {data && (
+        <div className="mt-8 flex justify-center">
+          <WeatherCard data={data as WeatherData} />
+        </div>
+      )}
 
       {/* Weather Metrics Table */}
-      <div className="mt-6 max-w-6xl w-full mx-auto">
-        {data && (
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Weather Metrics</h2>
-            <GenericTable headers={headers} data={weatherData} />
-          </div>
-        )}
-      </div>
+      {data && (
+        <div className="mt-8 max-w-5xl w-full mx-auto p-6 bg-purple-900 border border-purple-800 shadow-lg rounded-s">
+          <h2 className="text-2xl font-semibold text-orange-300 mb-4 text-center">
+            Weather Data
+          </h2>
+          <GenericTable headers={headers} data={weatherData} />
+        </div>
+      )}
     </>
   );
 };
