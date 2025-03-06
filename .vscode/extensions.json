@@ -1,0 +1,5 @@
+{
+    "recommendations": ["veroxyle.shadcn-ui-snippets", "suhelmakkad.shadcn-ui",
+    "bradlc.vscode-tailwindcss", "austenc.tailwind-docs", "codeium.codeium", "github.copilot-chat", "github.copilot", "burkeholland.simple-react-snippets", 
+    "dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "streetsidesoftware.code-spell-checker", "visualstudioexptteam.vscodeintellicode", "sourcegraph.cody-ai"] 
+}
