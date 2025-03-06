@@ -1,38 +1,31 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { FaSearch } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { Input } from "./ui/input";
+import { useState, FormEvent } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-const Search: React.FC = () => {
+interface SearchProps {
+  placeholder?: string;
+  onSearch: (searchTerm: string) => void; // Function to trigger search
+}
+
+const Search: React.FC<SearchProps> = ({ placeholder = "Search...", onSearch }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const navigate = useNavigate();
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    if (searchTerm) {
-      navigate(`/searched/${searchTerm}`);
-    }
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    console.log("Submitting search:", searchTerm); // Debugging
+    onSearch(searchTerm);
   };
 
   return (
-    <form
-      onSubmit={submitHandler}
-      className="mx-8 my-4 max-w-lg w-full relative"
-    >
-      <div className="relative w-full">
-        <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
-        <Input
-          type="text"
-          value={searchTerm}
-          onChange={handleChange}
-          className="bg-gradient-to-r from-gray-700 to-gray-800 text-white text-lg py-3 pl-12 pr-4 rounded-lg w-full"
-          placeholder="Search for recipes..."
-        />
-      </div>
+    <form onSubmit={submitHandler} className="flex items-center gap-2 w-full max-w-lg mx-auto p-4">
+      <Input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="pl-3"
+        placeholder={placeholder}
+      />
+      <Button type="submit">Search</Button>
     </form>
   );
 };
