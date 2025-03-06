@@ -1,6 +1,7 @@
 # dog
 
 [WeatherStack API](https://weatherstack.com/documentation).  
+[public api's](https://github.com/public-apis/public-apis)
 
 ---
 ### **Install ShadCN Components**
